@@ -37,11 +37,12 @@ jobs:
       - uses: amondnet/vercel-action@v42 #deploy
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
-          # github-token: ${{ secrets.GITHUB_TOKEN }} # Optional
-          vercel-args: "--prod --debug" # Optional
           vercel-org-id: ${{ secrets.ORG_ID}} # Required
           vercel-project-id: ${{ secrets.PROJECT_ID}} # Required
-          working-directory: dist
+          # 关键修改：加上 --yes 跳过确认，并把要部署的目录明确指定为 dist
+          vercel-args: "--prod --debug --yes" 
+          # 删掉 working-directory: dist
+          working-directory: ./
           vercel-version: "48.9.0"
       - name: zip
         run: |
